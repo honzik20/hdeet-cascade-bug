@@ -1,0 +1,31 @@
+{{- $img := "img" -}}
+{{- $alt := "alt" -}}
+{{- $class := "class" -}}
+{{- if .IsNamedParams -}}
+    {{- $img = (.Get "src") -}}
+    {{- $alt = (.Get "alt") -}}
+    {{- $class = (.Get "class") -}}
+{{- else -}}
+    {{- $img = (.Get 0) -}}
+    {{- $alt = (.Get 1) -}}
+    {{- $class = (.Get 2) -}}
+{{- end -}}
+{{- if eq $alt "alt text" -}}
+    {{- $alt = "" -}}
+{{- end -}}
+{{- if eq (substr $img 0 1) "/" -}}
+    {{- $filePath := path.Clean $img | relURL -}}
+    {{- $testPath := path.Join "static" $filePath -}}
+    {{- if fileExists $testPath -}}
+        <img class="{{ $class }}" data-toggle="tooltip" title="{{ $alt }}" src="{{ $img }}" alt="{{ $alt }}" >
+    {{- else -}}
+        {{- errorf "Image file %q in \"img\" shortcode not found. Topic %s." $img .Position -}}
+    {{- end -}}
+{{- else -}}
+    {{- if $.Page.Resources.GetMatch $img -}}
+        {{- $img = $.Page.Resources.GetMatch $img -}}
+        <img class="{{ $class }}" data-toggle="tooltip" title="{{- $alt -}}" src="{{ $img.RelPermalink }}" alt="{{- $alt -}}">
+    {{- else -}}
+        {{- errorf "Image file %q in \"img\" shortcode not found. Topic %s." $img .Position -}}
+    {{- end -}}
+{{- end -}}

@@ -1,0 +1,6 @@
+{{- $_hugo_config := `{ "version": 1 }` -}}
+{{- $color := "danger" -}}
+    <div class="alert alert-{{ $color }}" role="alert">
+    <h4 class="alert-heading">DANGER</h4>
+    {{ .Inner | markdownify }}
+    </div>

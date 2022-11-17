@@ -1,0 +1,5 @@
+{{- if .IsNamedParams -}}
+    <i class='{{ ( .Get "icon" )}} text-{{ with (.Get "color" ) }}{{ . }}{{ else }}primary{{ end }}'></i>
+{{- else -}}
+    <i class='{{ ( .Get 0 )}} text-{{ with (.Get 1 ) }}{{ . }}{{ else }}primary{{ end }}'></i>
+{{- end -}} 

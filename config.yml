@@ -1,0 +1,214 @@
+baseURL: ""
+uglyurls: true
+relativeURLs: true
+canonifyurls: false
+refLinksErrorLevel: warning 
+title: Help
+# buildDrafts: true
+
+theme:
+  - docsy
+
+module:
+  imports:
+  #essential to add .git to the path for Azure DevOps repos
+  - path: hta.hugo.assets
+
+contentDir: content/en
+defaultContentLanguage: en
+defaultContentLanguageInSubdir: false
+enableMissingTranslationPlaceholders: true
+
+# ignorefiles:
+#  - snippets/.*
+
+languages:
+  en:
+    title: Help
+    description: Help
+    languageName: English
+    weight: 1
+
+permalinks:
+  blog: '/:section/:year/:month/:day/:slug/'
+
+# disableKinds:
+#  - taxonomy
+#  - taxonomyTerm
+
+disableKinds: "RSS"
+
+taxonomies:
+  category: categories
+  tag: tags 
+  location: locations
+
+pluralizelisttitles: "false"
+
+markup:
+  asciidocExt:
+    attributes: {}
+    backend: html5
+    extensions: []
+    failureLevel: fatal
+    noHeaderOrFooter: true
+    preserveTOC: false
+    safeMode: unsafe
+    sectionNumbers: false
+    trace: false
+    verbose: false
+    workingFolderCurrent: false
+  blackFriday:
+    angledQuotes: false
+    extensions: null
+    extensionsMask: null
+    footnoteAnchorPrefix: ""
+    footnoteReturnLinkContents: ""
+    fractions: true
+    hrefTargetBlank: false
+    latexDashes: true
+    nofollowLinks: false
+    noreferrerLinks: false
+    plainIDAnchors: true
+    skipHTML: false
+    smartDashes: true
+    smartypants: true
+    smartypantsQuotesNBSP: false
+    taskLists: true
+  defaultMarkdownHandler: goldmark
+  goldmark:
+    extensions:
+      definitionList: true
+      footnote: true
+      linkify: true
+      strikethrough: true
+      table: true
+      taskList: true
+      typographer: true     
+    parser:
+      attribute: true
+      autoHeadingID: true
+      autoHeadingIDType: github
+    renderer:
+      hardWraps: false
+      unsafe: true
+      xhtml: false
+  highlight:
+    anchorLineNos: false
+    codeFences: true
+    # guessSyntax must be false if Mermaid diagrams are enabled
+    guessSyntax: false
+    hl_Lines: ""
+    lineAnchors: ""
+    lineNoStart: 1
+    lineNos: false
+    lineNumbersInTable: true
+    noClasses: true
+    style: monokai
+    tabWidth: 4
+  tableOfContents:
+    endLevel: 3
+    ordered: false
+    startLevel: 2
+
+# pygmentsCodeFences: true
+# pygmentsUseClasses: false
+# pygmentsUseClassic: false
+# pygmentsStyle: tango
+# 
+# blackfriday:
+  # plainIDAnchors: true
+  # hrefTargetBlank: true
+  # angledQuotes: false
+  # latexDashes: true
+# 
+# markup:
+  # goldmark:
+    # renderer:
+      # unsafe: true
+  # highlight:
+    # style: tango
+
+imaging:
+  resampleFilter: CatmullRom
+  quality: 75
+  anchor: smart
+
+# enableRobotsTXT: true
+# enableGitInfo: false
+# services:
+#  googleAnalytics: {}
+
+# ************ Site parameters **************
+
+params:
+  # add the product and version number with shortcode {{< prod-ver >}}
+  product: 
+    name: HDEET
+    version: "4"
+
+  taxonomy:
+    taxonomyCloud:
+      - "tags"
+      - "locations"
+
+  # title as it appears in top left corner
+  title: Help
+
+  copyright: "Me."
+  privacy_policy: ""
+
+  # licensing email address can be used in a topic with {{ hta/email-licensing }}
+  licensing: 
+
+  offlineSearch: true
+  no_internet: true
+
+  # location of css overrides
+  custom_css:
+    - css/custom.css
+    - css/proc.css
+
+  # MathJax support
+  mathjax:
+    enable: true
+
+  # Mermaid diagram support
+  # Ensure markup > hughlight > guessSyntax is false for mermaid diagrams to work
+  mermaid: 
+    enable: true
+    theme: default
+
+  prism_syntax_highlighting: true
+
+  version_menu: Releases
+  archived_version: false
+  version: '0.0'
+  url_latest_version: 'https://example.com'
+
+  ui:
+    navbar_logo: true
+    footer_about_disable: true
+    # sidebar_menu_compact: true shows a collapsed sidebar
+
+    sidebar_menu_compact: true
+    sidebar_menu_foldable: true
+    breadcrumb_disable: true
+    sidebar_search_disable: true
+    readingtime:
+      enable: false
+
+#   feedback:
+#     enable: false
+#     'yes': >-
+#       Glad to hear it! Please <a
+#       href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we
+#       can improve</a>.
+#     'no': >-
+#       Sorry to hear that. Please <a
+#       href="https://github.com/USERNAME/REPOSITORY/issues/new">tell us how we
+#       can improve</a>.
+#   readingtime:
+#     enable: false
+
+# algolia_docsearch: false

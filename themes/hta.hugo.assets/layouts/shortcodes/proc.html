@@ -1,0 +1,14 @@
+{{- $_hugo_config := `{ "version": 1 }` -}}
+{{- $color := "light" -}}
+{{- $title := "" -}}
+{{- if .IsNamedParams -}}
+<p>YEP - NAMED!!!!!</p>
+    {{- $title = .Get "title" -}}
+{{- else -}}
+<p>NOPE!!!!!!</p>
+    {{- $title = .Get 0 -}}
+{{- end -}}
+<div class="proc bg-{{ $color }}" role="note">
+    <h3 class="proc-heading" id="#proc-{{ $title | urlize | safeURL }}">{{ $title }}</h3>
+    {{ .Inner | markdownify }}
+</div>

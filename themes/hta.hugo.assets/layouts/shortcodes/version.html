@@ -1,0 +1,5 @@
+{{- with $.Site.Params.product.version -}}
+    {{ . }}
+{{- else -}}
+    {{- errorf "The \"version\" shortcode is causing an error. No value is defined in config.yml for the parameter 'product.version'. Found at: %s" .Position -}}
+{{- end -}}

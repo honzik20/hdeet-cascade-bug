@@ -1,0 +1,16 @@
+{{- $filePath := "" -}}
+{{- $caption := "" -}}
+
+{{- if .IsNamedParams -}}
+    {{- $filePath = path.Clean (.Get "src") | relURL -}}
+    {{- $caption = .Get "caption" -}}
+{{- else -}}
+    {{- $filePath := path.Clean (.Get 0) | relURL -}}
+    {{- $caption = (.Get 1) -}}
+{{- end -}}
+{{- $testPath := path.Join "static" $filePath -}}
+{{- if fileExists $testPath -}}
+    <a href="{{ $filePath | relURL }}" download class="download"/><span class="material-icons-outlined">file_download</span> {{ $caption | markdownify }}</a>
+{{- else -}}
+{{- errorf "Target file %q in \"download\" shortcode not found. Topic %s." (.Get 0) .Position -}}
+{{- end -}}

@@ -1,0 +1,7 @@
+{{ define "main" }}
+
+<div class="d-flex p-2 mb-4 bg-light">
+                <div>This is version {{ .Params.Version}}. Looking for a different version? {{ partial "topic-version-switcher.html" . }}</div></div>
+
+        {{ .Render "content" }}
+{{ end }}

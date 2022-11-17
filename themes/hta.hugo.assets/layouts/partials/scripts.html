@@ -1,0 +1,106 @@
+<!-- HTA mod: offline scripts-->
+<script src="/js/popper.min.js" ></script>
+<script src="/js/bootstrap.min.js" ></script>
+<script src="/js/scrollspy.js" ></script>
+{{ if .Site.Params.mermaid.enable }}
+<script type="text/javascript" src="/js/mermaid.min.js"></script>
+{{ end }}
+
+<!-- scripts to enable search to work when totally offline -->
+{{ $offlineSearchIndex := resources.Get "json/offline-search-index.json" | resources.ExecuteAsTemplate "offline-search-index.json" . }}
+{{ $offlineSearch := "const OFFLINE_SEARCH=" | resources.FromString "js/offline.json" }}
+{{ $offlinejs := (slice $offlineSearch $offlineSearchIndex) | resources.Concat "js/offlinemain.js" | resources.Fingerprint "sha512"}}
+<script src="{{ $offlinejs.RelPermalink }}"></script>
+<!-- END HTA mod -->
+
+{{ if .Site.Params.markmap.enable }}
+<style>
+.markmap > svg {
+  width: 100%;
+  height: 300px;
+}
+</style>
+<script>
+window.markmap = {
+  autoLoader: { manual: true },
+};
+</script>
+<script src="/js/markmap-autoloader.js"></script>
+{{ end }}
+
+<script src='{{ "/js/tabpane-persist.js" | relURL }}'></script>
+
+<!-- load the deflate.js for plantuml support -->
+{{ if .Site.Params.plantuml.enable }}
+<script src='{{ "/js/deflate.js" | relURL }}'></script>
+{{ end }}
+
+<!-- load stylesheet and scripts for KaTeX support --> 
+{{ if .Site.Params.katex.enable }}
+<link rel="stylesheet" href="/css/katex.min.css">
+<!-- The loading of KaTeX is deferred to speed up page rendering -->
+<script defer src="/js/katex.min.js"></script>
+<!-- check whether support of mhchem is enabled in config.toml --> 
+{{ if .Site.Params.katex.mhchem.enable }}
+<!-- To add support for displaying chemical equations and physical units, load the mhchem extension: -->
+<script defer src="js/mhchem.min.js"></script>
+{{ end }}
+<!-- To automatically render math in text elements, include the auto-render extension: -->
+<script defer src='/js/auto-render.min.js' {{ printf "onload='renderMathInElement(%s, %s);'" (( .Site.Params.katex.html_dom_element | default "document.body" ) | safeJS ) ( printf "%s" ( $.Site.Params.katex.options | jsonify )) | safeHTMLAttr }}></script>
+{{ end }}
+
+{{ $jsBase := resources.Get "js/base.js" }}
+{{ $jsAnchor := resources.Get "js/anchor.js" }}
+{{ $jsSearch := resources.Get "js/search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home }}
+{{ $jsMermaid := resources.Get "js/mermaid.js" | resources.ExecuteAsTemplate "js/mermaid.js" . }}
+{{ $jsMarkmap := resources.Get "js/markmap.js" | resources.ExecuteAsTemplate "js/markmap.js" . }}
+{{ $jsPlantuml := resources.Get "js/plantuml.js" | resources.ExecuteAsTemplate "js/plantuml.js" . }}
+{{ if .Site.Params.offlineSearch }}
+{{ $jsSearch = resources.Get "js/offline-search.js" | resources.ExecuteAsTemplate "js/search.js" .Site.Home }}
+{{ end }}
+{{ $js := (slice $jsBase $jsAnchor $jsSearch $jsMermaid $jsPlantuml $jsMarkmap) | resources.Concat "js/main.js" }}
+{{ if not hugo.IsProduction }}
+<script src="{{ $js.RelPermalink }}"></script>
+{{ else }}
+{{ $js := $js | minify | fingerprint }}
+<script src="{{ $js.RelPermalink }}"></script>
+{{ end }}
+{{ if .Site.Params.prism_syntax_highlighting }}
+<!-- scripts for prism -->
+<script src='{{ "/js/prism.js" | relURL }}'></script>
+{{ end }}
+<!-- scripts for MathJax -->
+{{ with .Site.Params.mathjax }}
+{{ if .enable }}
+<script type="text/javascript" async
+        src="/js/mathjax/es5/tex-chtml.js">
+    MathJax.Hub.Config({
+        tex2jax: {
+            inlineMath: [['$', '$'], ['\\(', '\\)']],
+            displayMath: [['$$', '$$']],
+            processEscapes: true,
+            processEnvironments: true,
+            skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+            TeX: {
+                equationNumbers: { autoNumber: "AMS" },
+                extensions: ["AMSmath.js", "AMSsymbols.js"]
+            }
+        }
+    });
+    MathJax.Hub.Queue(function () {
+        // Fix <code> tags after MathJax finishes running. This is a
+        // hack to overcome a shortcoming of Markdown. Discussion at
+                // https://github.com/mojombo/jekyll/issues/199
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i = 0; i < all.length; i += 1) {
+            all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+    });
+    MathJax.Hub.Config({
+        // Autonumbering by mathjax
+        TeX: { equationNumbers: { autoNumber: "AMS" } }
+    });
+</script>
+{{ end }}
+{{ end }}
+{{ partial "hooks/body-end.html" . }}

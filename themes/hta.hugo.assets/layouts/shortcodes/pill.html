@@ -1,0 +1,11 @@
+{{- if gt (len .Inner) 0 -}}
+    <div class="pill-badge-heading-wrapper">
+        {{- .Inner | markdownify -}}
+        <div class="pill-badge-container"> 
+            <span class="badge badge-pill badge-primary">{{- if .IsNamedParams -}}{{- .Get "text" -}}{{- else -}}{{- .Get 0 -}}{{- end -}}</span>
+        </div>    
+        <div class="anchor-suffix"></div>
+    </div>
+{{- else -}}
+    <span class="badge badge-pill badge-primary">{{- if .IsNamedParams -}}{{- .Get "text" -}}{{- else -}}{{- .Get 0 -}}{{- end -}}</span>
+{{- end -}}

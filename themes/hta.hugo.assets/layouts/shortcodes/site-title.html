@@ -1,0 +1,5 @@
+{{- with $.Site.Params.title -}}
+    {{ . }}
+{{- else -}}
+    {{- errorf "The \"site-title\" shortcode is causing an error. No value is defined in config.yml for the parameter 'title'. Found at: %s" .Position -}}
+{{- end -}}

@@ -1,0 +1,43 @@
+{{ $links := .Site.Params.links }}
+<footer class="bg-dark row d-print-none">
+  <div class="container-fluid mx-sm-5">
+    <div class="row">
+      <div class="col-6 col-sm-4 order-sm-2 align-self-center">
+        {{ with $links }}
+        {{ with index . "user"}}
+        {{ template "footer-links-block"  . }}
+        {{ end }}
+        {{ end }}
+        {{- with .Site.Params.ui.footer_published_date -}}<small class="text-white">Published: {{ now.UTC.Format "Jan 2, 2006 15:04 MST"  }}</small>{{- end -}}
+      </div>
+      <div class="col-6 col-sm-4 text-right text-xs-center order-sm-3 py-2">
+        <span class="footer-logo"><svg xmlns="http://www.w3.org/2000/svg" height="31" width="172.42999" overflow="visible" fill-rule="evenodd" stroke-linejoin="bevel" stroke-width=".501"><path fill="#fff" d="M2 27.713V3.292h8.825v9.2c0 .455.331.749.739.749h10.184c.394.0.724-.294.724-.749v-9.2h8.805v24.421h-8.805v-8.498c0-.385-.33-.719-.724-.719H11.564c-.408.0-.739.334-.739.719v8.498zM33.861 15.5C33.855 7.143 41.031 2 49.898 2c8.787.0 16.004 4.807 16.004 13.5.0 8.003-7.217 13.5-16.004 13.5-8.867.0-16.043-5.032-16.037-13.5zm21.814.18c0-5.247-2.434-9.473-5.903-9.473-3.753.0-5.873 4.226-5.873 9.473.0 5.226 2.246 9.471 5.873 9.471 3.719.0 5.903-4.245 5.903-9.471zM68.414 27.714V3.292h19.702c4.185.0 7.61 3.376 7.61 7.623.0 2.491-1.268 4.763-3.205 6.159.003.005.007.011.013.016-1.211.719-.652 1.431-.25 2.123l6.096 8.501H88.075l-4.543-6.678c-1.422-2.159-2.558-2.514-4.158-2.159-1.062.194-2.064 1.123-2.064 2.515v3.595l-.014-.03.014 2.757zm18.625-16.731v-.002c0-1.783-1.501-3.248-3.321-3.248h-3.947c-1.826.0-3.315 1.465-3.315 3.248v.002c0 1.788 1.489 3.236 3.315 3.236h3.947c1.82.0 3.321-1.448 3.321-3.236zM99.926 3.296v24.413h8.831V3.296zm12.235 24.43V3.292h19.754c.868.032 1.314.108 1.349.112 3.135.36 5.574 3.016 5.574 6.234.0 2.027-.943 3.817-2.391 4.895-.003.003-.005.004-.007.006l-.002.003c-.003.002-.005.003-.007.005.0.001.001.002.001.002-.007.006-.014.011-.022.016v.694c.004.002.008.004.012.007 1.932 1.165 3.242 3.294 3.242 5.747.0 3.685-2.919 6.65-6.541 6.713zm19.004-7.543c0-1.824-1.56-3.294-3.484-3.294h-4.215c-1.393.0-2.619.79-3.183 1.93-.009.023-.018.046-.024.058-.148.364-.259.736-.259 1.11v.555l-.001.133c.258 1.584 1.735 2.816 3.467 2.816h4.215c1.924.0 3.484-1.479 3.484-3.308zm-.939-9.572v-.002c0-1.71-1.437-3.093-3.196-3.093h-3.856c-1.775.0-3.215 1.383-3.215 3.093v.002c0 1.632 1.44 3.038 3.215 3.038h3.856c1.759.0 3.196-1.406 3.196-3.038zM140.062 27.712l8.612-24.42h13.146l8.61 24.42h-9.072l-1.46-4.162v-.001h-.007c-.033-.084-.087-.195-.151-.282-.123-.122-.289-.182-.492-.182h-7.939c-.242.0-.442.104-.636.464h-.003l-1.46 4.163zm18.209-8.442-.011-.028-.002-.006c.018-.011.031-.039.04-.072.036-.047.041-.071.021-.052.012-.035.019-.073.02-.111.017-.083.0-.186-.043-.316l-.921-2.396c-.239-.638-.626-1.719-.864-2.359l-.924-2.395c-.175-.496-.418-.534-.599-.121l-.062.229-.923 2.287c-.23.64-.614 1.721-.846 2.359l-.937 2.396c-.042.139-.054.235-.037.34-.011-.008-.007.027.014.064.063.304.346.501.775.501h4.581c.34.0.598-.119.718-.32z"></path></svg></span>
+        {{ with $links }}
+        {{ with index . "developer"}}
+        {{ template "footer-links-block"  . }}
+        {{ end }}
+        {{ end }}
+      </div>
+      <div class="col-12 col-sm-4 order-sm-2 d-flex">
+        <div class="align-self-center text-center">
+          {{ with .Site.Params.copyright }}<small class="text-white">&copy; {{ now.Year}} {{ .}} {{ T "footer_all_rights_reserved" }}</small>{{ end }}
+          {{ with .Site.Params.privacy_policy }}<small class="ml-1"><a href="{{ . }}" target="_blank">{{ T "footer_privacy_policy" }}</a></small>{{ end }}
+    {{ if not .Site.Params.ui.footer_about_disable }}
+      {{ with .Site.GetPage "about" }}<p class="mt-2"><a href="{{ .RelPermalink }}">{{ .Title }}</a></p>{{ end }}
+    {{ end }}
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+{{ define "footer-links-block" }}
+<ul class="list-inline mb-0">
+  {{ range . }}
+  <li class="list-inline-item mx-2 h3" data-toggle="tooltip" data-placement="top" title="{{ .name }}" aria-label="{{ .name }}">
+    <a class="text-white" target="_blank" rel="noopener noreferrer" href="{{ .url }}" aria-label="{{ .name }}">
+      <i class="{{ .icon }}"></i>
+    </a>
+  </li>
+  {{ end }}
+</ul>
+{{ end }}

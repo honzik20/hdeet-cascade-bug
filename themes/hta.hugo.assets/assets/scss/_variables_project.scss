@@ -1,0 +1,25 @@
+/*
+
+Add styles or override variables from the theme here.
+
+*/
+
+$td-enable-google-fonts: false;
+$font-family-base: Arial, Helvetica Neue, sans-serif;
+$font-family-sans-serif: Arial;
+
+$primary: #2A6CD3;
+$primary-light: lighten($primary, 75%) !default;
+$secondary: #5B6D88 !default;
+
+$success: #62A900 !default;
+
+$white: #FFFFFF !default;
+$light: #E2E5EB !default;
+$dark: #000000 !default;
+$blue: #72A1E5 !default;
+$orange: #BA5A31 !default;
+
+$info: #62A900 !default;
+$warning: #FFA256 !default;
+$danger: #FF3232 !default;

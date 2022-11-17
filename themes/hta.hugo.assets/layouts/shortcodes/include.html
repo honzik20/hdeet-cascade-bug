@@ -1,0 +1,34 @@
+{{- if .IsNamedParams -}}
+    {{- .Scratch.Set "file" (readFile (.Get "file")) -}}
+    {{- if .Get "lines" -}}
+        {{- .Scratch.Set "lines" (.Get "lines") -}}
+    {{- end -}}
+{{- else -}}
+    {{- .Scratch.Set "file" (readFile (.Get 0)) -}}
+    {{- if .Get 1 -}}
+        {{- .Scratch.Set "lines" (.Get 1) -}}
+    {{- end -}}
+{{- end -}}
+{{- $file := .Scratch.Get "file" -}}
+{{- $lines := .Scratch.Get "lines" -}}
+{{ with $lines }}
+    {{- if in . "-" -}}
+        {{- $lines = split $lines "-" -}}
+        {{- $first := (index $lines 0) -}}
+        {{- $first = sub (int $first) 1 -}}
+        {{- $second := int (index $lines 1) -}}
+        {{- $numLines := sub $second $first -}}
+        {{- $.Scratch.Set "first" $first -}}
+        {{- $.Scratch.Set "second" $second -}}
+        {{- $.Scratch.Set "numLines" $numLines -}}
+    {{- else -}}
+        {{- .Scratch.Set "first" $lines -}}
+        {{- .Scratch.Set "numLines" 1 -}}
+    {{- end -}}
+    {{- $first := $.Scratch.Get "first" -}}
+    {{- $numLines := $.Scratch.Get "numLines" -}}
+    {{- $file = split $file "\n" -}}
+    {{- $file = first $numLines (after $first $file) -}}
+    {{- $file = delimit $file "\n" -}}
+{{ end }}
+{{- $file | safeHTML -}}

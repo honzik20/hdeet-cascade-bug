@@ -1,0 +1,12 @@
+{{- $_hugo_config := `{ "version": 1 }` -}}
+{{- $color := "light" -}}
+{{- $title := "" -}}
+{{- if .IsNamedParams -}}
+    {{- $title = .Get "title" -}}
+{{- else -}}
+    {{- $title = .Get 0 -}}
+{{- end -}}
+<div class="sproc bg-{{ $color }}" role="note">
+    <h2 class="sproc-heading" id="#sproc-{{ $title | urlize | safeURL }}">{{ $title }}</h2>
+    {{ .Inner | markdownify }}
+</div>

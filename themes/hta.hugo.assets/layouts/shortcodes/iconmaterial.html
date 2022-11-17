@@ -1,0 +1,5 @@
+{{- if .IsNamedParams -}}
+    <span class="material-icons{{ with .Get "style" }}-{{ . }}{{ end }} text-{{ with .Get "color" }}{{ . }}{{ else }}primary{{ end }}">{{- .Get "icon" -}}</span>
+{{- else -}}
+    <span class="material-icons{{ with .Get 2 }}-{{ . }}{{ end }} text-{{ with .Get 1 }}{{ . }}{{ else }}primary{{ end }}">{{- .Get 0 -}}</span>
+{{- end -}}

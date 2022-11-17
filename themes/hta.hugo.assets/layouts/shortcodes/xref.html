@@ -1,0 +1,10 @@
+{{- $page := .Site.GetPage (.Get 0) -}}
+{{- if not $page -}}
+    {{- errorf "Can't find xref %q in topic %s." (.Get 0) .Position -}}
+{{- else -}}
+    {{- if $page.Params.headless -}}
+        {{- $page.Title -}}
+    {{- else -}}
+        <a href="{{ ref .Site.GetPage (.Get 0) }}">{{ $page.Title }}</a>
+    {{- end -}}
+{{- end -}}

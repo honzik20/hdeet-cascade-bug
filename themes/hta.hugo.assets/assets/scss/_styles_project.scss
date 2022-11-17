@@ -1,0 +1,377 @@
+/********** Content width **********/
+
+@media screen and (min-width: 2000px) {
+.td-content {
+  max-width: 90%;
+  }
+}
+
+/********** Text **********/
+
+body {
+  color: #28303C;
+}
+
+.lead {
+  color: #5B6D88;
+}
+
+h1, h2, h3, h5, h6 {
+  color: #28303C;
+}
+
+h4, h6 {
+  color: #5b6d88;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
+strong {
+    color: #28303C;
+}
+
+/********** Links **********/
+
+a {
+  font-weight: 600;
+}
+
+/* unvisited link */
+a:link {
+  color: #2661BE;
+}
+
+/* visited link */
+a:visited {
+  color: #2256A8;
+}
+
+/* mouse over link */
+a:hover {
+  text-shadow: 0 0 1px #878c94;
+}
+
+/* selected link */
+a:active {
+  padding-top: 2px;
+}
+
+.td-sidebar-nav__section-title a {
+    color: #222;
+    font-weight: normal;
+}
+
+.breadcrumb-item a {
+  font-weight: normal;
+}
+
+.td-toc #TableOfContents a {
+  color: #5B6D88;
+
+    &.active {
+    font-weight: bold;
+    color: $primary;
+  }
+}
+
+/********** Lists **********/
+
+ul, ol {
+  list-style-position: outside;
+  padding-left: 1.3em;  
+}
+
+ul {
+  list-style-type: square;
+}
+
+ul ::marker {
+  color: $primary;
+}
+
+ol ::marker {
+  color: $primary;
+  font-weight: bold;
+}
+
+ul ul li,
+ol ul li {
+  list-style-type: circle;
+}
+
+ol ol li {
+  list-style-type: lower-alpha;
+}
+
+ol ol ol li {
+  list-style-type: lower-roman;
+}
+
+li {
+  margin-top: 0.4em;
+  margin-bottom: 0;
+}
+
+li > p {
+  margin-bottom: 0;
+  margin-top: 0.82em;
+}
+
+/****** IMAGES  *****/
+
+img {
+  margin: 0.5em 0 1em 0;
+}
+
+// Remove 2-pixel top padding from inline images
+p > img, li > img, td > img {
+    padding-top: 2px;
+}
+
+.alert {
+  padding: 0.5rem 1.25rem 0.1rem 1.25rem;
+}
+
+/****** SIDEBAR  *****/
+
+#td-sidebar-menu li {
+    margin-top: 0;
+    line-height: 1.45;
+}
+
+//Override docsy left sidebar rules (line ~123 _sidebar-tree.scss)
+.td-sidebar {
+  &__inner {
+    @include media-breakpoint-up(md) {
+      @supports (position: sticky) {
+        height: calc(100vh - 130px);
+      }
+    }
+  }
+}
+
+/****** PILL  *****/
+
+.badge-pill {
+    position: relative;
+    bottom: 2px;
+}
+
+//Extend docsy header rules to also apply when headings wrapped in additional element
+.td-content {
+  
+  .pill-badge-heading-wrapper {
+    display:flex;
+
+    .pill-badge-container {
+      margin-left: 8px;
+    }
+
+    .anchor-suffix {
+      margin-left:8px;
+      height:24px;
+      margin-bottom:6px;
+      align-self: center;      
+    }
+
+    > h1 {
+      font-weight: $font-weight-bold;
+      margin-bottom: 1rem;
+
+      &~ .pill-badge-container {
+        margin-top: -0.5rem;  
+      }
+
+      &~ .anchor-suffix {
+       margin-bottom: 1rem; 
+      }
+    }
+
+    > h2 {
+      margin-bottom: 1rem;
+
+      &~ .pill-badge-container {
+        margin-top: -0.5rem;  
+      }
+
+      &~ .anchor-suffix {
+       margin-bottom: 1rem; 
+      }
+    }
+
+    > h2:not(:first-child) {
+      margin-top: 3rem;
+
+      &~ .pill-badge-container {
+        margin-top: 1.5rem;
+      }
+
+      &~ .anchor-suffix {
+        margin-top: 1.7rem;
+      }
+
+    }
+
+    > h2 + h3 {
+      margin-top: 1rem;
+
+      &~ .pill-badge-container {
+        margin-top: 0.5rem;
+      }
+
+      &~ .anchor-suffix {
+        margin-top: .2rem;
+      }
+    }
+
+    > h3,
+    > h4,
+    > h5,
+    > h6 {
+      margin-bottom: 1rem;
+      margin-top: 2rem;
+
+      &~ .pill-badge-container {
+        margin-top: 1.5rem;
+      }
+  
+      &~ .anchor-suffix {
+        margin-top: 1.2rem;
+      }
+    }
+  }
+}
+
+/****** FOOTER ************/
+
+//Override docsy footer rules
+
+footer {
+    min-height: 50px;
+
+    @include media-breakpoint-down(md) {
+        min-height: 200px;
+    }
+}
+
+/********* Code *********/
+
+code,
+.td-content p code,
+.td-content li > code,
+.td-content table code {
+  padding: 0;
+  background-color: #cccccc8c;
+  font-size: 1.05em;
+}
+
+.code-toolbar {
+    padding: 0 0 0 0;
+    max-width: 80%;
+}
+
+li > .code-toolbar, .highlight > .code-toolbar {
+    max-width: 100%;
+}
+
+pre {
+  background-color: #28303C !important;
+}
+
+pre.mermaid {
+   background-color: #FFFFFF!important; 
+} 
+
+.code-toolbar {
+    max-width: 80%;
+} 
+
+div.toolbar-item > span {
+    background: inherit !important;
+}
+
+div.code-toolbar > .toolbar span:hover {
+    color: #bbb;
+}
+
+code[class*="language-"], pre[class*="language-"] {
+    margin-bottom: 2em !important;
+}
+
+.card, .td-content .highlight {
+    display: block;
+    border: 0;
+}
+
+/********* Section page  *********/
+
+.section-index .entry {
+  padding: .5rem .75rem 0 .75rem;
+  }
+
+/********* Navbar  *********/
+/* When sidebar search disabled, homepage link */
+/* is too close to banner. This fixes it */
+
+@media screen and (min-width: 992px) {
+    #td-section-nav  {
+    padding-top: 1.3rem!important;
+    }
+
+    /* Clear the margin when the sidebar search is enabled */
+    form.td-sidebar__search + #td-section-nav  {
+    padding-top: 0px!important;
+    }
+}
+
+/********* Procedure headings  *********/
+
+.proc {
+    background-color: #E0EAF8;
+    padding: 0 2rem 2rem;
+    margin: 3.2rem 4rem 2rem 0;
+    display: block;
+    max-width: 80%;
+}
+
+.proc-heading {
+    background: #9DBCEB;
+    padding: 0.6em 1.7em;
+    font-weight: 600;
+    font-size: 1em;
+    top: -17px;
+    left: -32px;
+    display: inline-block;
+    position: relative;
+
+}
+
+/********* Super-procedure heading  *********/
+
+.sproc {
+    padding: 0 2rem 2rem;
+    margin: 3.2rem 4rem 2rem 0;
+    display: block;
+    max-width: 80%;
+    outline: 2px #2A6CD3;
+    outline-style: solid;
+    outline-offset: -2px;
+}
+
+.sproc-heading {
+    background: #153568;
+    color: #F2F4F6;
+    padding: 0.6em 1.7em;
+    font-weight: 600;
+    font-size: 1.2em;
+    top: -17px;
+    left: -32px;
+    display: inline-block;
+    position: relative;
+}
+
+h2.sproc-heading > a:link {
+    color: $light;
+}

@@ -1,0 +1,5 @@
+{{- with $.Site.Params.product.name -}}
+    {{ . }}
+{{- else -}}
+    {{- errorf "The \"product\" shortcode is causing an error. No value is defined in config.yml for the parameter 'product.name'. Found at: %s" .Position -}}
+{{- end -}}
