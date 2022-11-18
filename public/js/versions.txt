@@ -1,0 +1,11 @@
+lunr.min.js - 2.3.8
+jquery-3.5.1.min.js - 3.5.1
+popper.min.js - 1.16.1
+bootstrap.min.js - 4.6.0
+mermaid.min.js - 8.11.2
+markmap-autoloader.js - 0.1.6
+katex.min.js - 13.2
+mhchem.min.js - 13.2
+auto-render.min.js - 0.13.2
+mathjax - 3.2.0
+prismJS - https://prismjs.com/download.html#themes=prism-tomorrow&languages=markup+css+clike+javascript+apacheconf+asciidoc+aspnet+bash+basic+batch+bbcode+c+csharp+cpp+coffeescript+css-extras+diff+docker+excel-formula+git+go+http+hpkp+hsts+json+json5+liquid+markdown+markup-templating+matlab+mongodb+objectivec+powerquery+powershell+regex+rest+sass+scss+shell-session+toml+typescript+vbnet+vim+visual-basic+wiki+xml-doc+yaml&plugins=line-highlight+line-numbers+autolinker+show-language+remove-initial-line-feed+command-line+normalize-whitespace+toolbar+copy-to-clipboard+filter-highlight-all
